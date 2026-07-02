@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ obj_title }}</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    main { width: 100%; max-width: 540px; }
+    h1 { font-size: 1.45rem; font-weight: 700; margin-bottom: .65rem; }
+    .desc {
+      font-size: .95rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+    }
+    textarea {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 7px;
+      padding: .75rem .9rem;
+      font-size: 1rem;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 130px;
+      color: inherit;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79,70,229,.15);
+    }
+    button {
+      margin-top: 1rem;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: .7rem 1.75rem;
+      font-size: 1rem;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    button:hover { background: #4338ca; }
+    .alert-error {
+      padding: .85rem 1rem;
+      border-radius: 7px;
+      margin-bottom: 1.25rem;
+      font-size: .9rem;
+      line-height: 1.5;
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+  </style>
+</head>
+<body>
+<main>
+  {% if obj_title %}<h1>{{ obj_title }}</h1>{% endif %}
+  {% if obj_desc %}<p class="desc">{{ obj_desc }}</p>{% endif %}
+  {% if error %}<div class="alert-error">{{ error }}</div>{% endif %}
+  <form method="post">
+    <textarea name="message" placeholder="Enter your message…">{{ request.form.get('message', '') }}</textarea>
+    <button type="submit">Submit</button>
+  </form>
+</main>
+</body>
+</html>
