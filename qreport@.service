@@ -8,10 +8,10 @@ After=syslog.target
 RestartSec=10
 Restart=always
 User=www-data
-Environment="QREPORT_CONFIG=/usr/local/etc/django/%i/config.ini"
+Environment="QREPORT_CONFIG=/usr/local/etc/wsgi/%i/config.ini"
 RuntimeDirectory=%i
 RuntimeDirectoryPreserve=yes
-ExecStart=/usr/local/share/django/qreport/venv/bin/gunicorn qreport.app:app --bind unix:/run/%i/%i.sock
+ExecStart=/usr/local/share/wsgi/qreport/venv/bin/gunicorn qreport.app:app --bind unix:/run/%i/%i.sock
 
 [Install]
 WantedBy=multi-user.target
