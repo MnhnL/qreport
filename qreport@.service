@@ -9,9 +9,10 @@ RestartSec=10
 Restart=always
 User=www-data
 Environment="QREPORT_CONFIG=/usr/local/etc/wsgi/%i/config.ini"
+Environment="HOME=/run/%i"
 RuntimeDirectory=%i
 RuntimeDirectoryPreserve=yes
-ExecStart=/usr/local/share/wsgi/qreport/venv/bin/gunicorn qreport.app:app --bind unix:/run/%i/%i.sock
+ExecStart=/usr/local/share/wsgi/qreport/venv/bin/gunicorn qreport.app:app --bind unix:/run/%i/%i.sock --worker-tmp-dir /dev/shm
 
 [Install]
 WantedBy=multi-user.target
